@@ -1,0 +1,295 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(简体，中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\Experiment.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
+    "#include ""l.CHS\\afxres.rc""      // 标准组件\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\Experiment.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 170, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 Experiment"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,21,20
+    LTEXT           "Experiment，1.0 版",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2011",IDC_STATIC,42,26,114,8
+    DEFPUSHBUTTON   "确定",IDOK,113,41,50,14,WS_GROUP
+END
+
+IDD_EXPERIMENT_DIALOG DIALOGEX 0, 0, 299, 339
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DMD系统上位机 V2.1_20170921 BY ZJ"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "取消",IDC_BTN_Cancel,229,235,50,14
+    GROUPBOX        "帧频、脉宽设置",IDC_STATIC,201,8,85,81,BS_CENTER,WS_EX_DLGMODALFRAME
+    PUSHBUTTON      "下载随机数文件",IDC_BTN_FileDownload,11,99,50,14
+    PUSHBUTTON      "下载伪随机数",IDC_BTN_RandomNumDownload,117,99,50,14
+    PUSHBUTTON      "复位光栅",IDC_BTN_ResetDMD,11,123,50,14
+    PUSHBUTTON      "开始显示",IDC_BTN_ShowDMD,11,147,50,14
+    PUSHBUTTON      "停止显示",IDC_BTN_StopDMD,64,147,50,14
+    PUSHBUTTON      "选择显示区域",IDC_BTN_SiteSelect,64,99,50,14
+    LTEXT           "左上坐标",IDC_STATIC,72,214,33,8
+    LTEXT           "右下坐标",IDC_STATIC,71,237,33,8
+    LTEXT           "行",IDC_STATIC,126,204,33,8
+    LTEXT           "列",IDC_STATIC,160,205,33,8
+    PUSHBUTTON      "确定",IDC_BTN_OK,229,211,50,14
+    PUSHBUTTON      "上",IDC_BTN_SiteUp,40,209,12,13
+    PUSHBUTTON      "左",IDC_BTN_SiteLeft,30,223,12,12
+    PUSHBUTTON      "右",IDC_BTN_SiteRight,51,223,12,11
+    PUSHBUTTON      "下",IDC_BTN_SiteDown,41,235,12,12
+    EDITTEXT        IDC_EDIT_PluseWidth,208,38,32,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "提交脉宽",IDC_BTN_PluseWidth,248,38,32,15
+    GROUPBOX        "循环帧数与同步设置",IDC_STATIC,114,9,82,83
+    EDITTEXT        IDC_EDIT_FrameCount,118,20,35,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "帧数提交",IDC_BTN_FrameCount,159,20,35,13
+    PUSHBUTTON      "内同步",IDC_BTN_InterSync,118,38,35,13
+    PUSHBUTTON      "外同步",IDC_BTN_ExterSync,159,38,35,13
+    PUSHBUTTON      "",IDC_BTN_ChangeMode,119,58,73,16
+    LTEXT           "脉宽=设定值x50微秒",IDC_STATIC,214,74,65,11
+    PUSHBUTTON      "地址复位",IDC_BTN_ResetAddr,64,123,50,14
+    PUSHBUTTON      "设置存储路径",IDC_BTN_SavePath,165,274,114,18
+    CONTROL         "循环显示",IDC_RBTN_CycleShow,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,79,43,9
+    PUSHBUTTON      "设置搜索路径",IDC_BTN_SearchPath,18,274,109,18
+    EDITTEXT        IDC_EDIT_SearchPath,7,295,138,37,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | ES_WANTRETURN | WS_VSCROLL
+    EDITTEXT        IDC_EDIT_SavePath,148,295,138,37,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | ES_WANTRETURN | WS_VSCROLL
+    GROUPBOX        "多文件下载",IDC_STATIC,16,168,266,30
+    EDITTEXT        IDC_EDIT_MultfileName,47,180,66,13,ES_AUTOHSCROLL
+    LTEXT           "FILE",IDC_STATIC,21,182,15,12
+    LTEXT           "FROM",IDC_STATIC,123,182,19,13
+    EDITTEXT        IDC_EDIT_StartIndex,152,180,29,13,ES_AUTOHSCROLL
+    LTEXT           "TO",IDC_STATIC,188,182,14,13
+    EDITTEXT        IDC_EDIT_EndIndex,206,180,30,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "开始下载",IDC_BTN_MultfileDownload,242,179,31,14
+    LTEXT           "当前状态",IDC_STATIC,7,257,28,16
+    EDITTEXT        IDC_EDIT_ProgressBar,38,256,241,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "初始化USB",IDC_BTN_UsbInit,58,11,46,13
+    EDITTEXT        IDC_EDIT_StatusBar,19,28,86,66,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    EDITTEXT        IDC_EDIT_FreqSet,208,20,32,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "帧频设置",IDC_BTN_FreqSet,248,20,32,15
+    PUSHBUTTON      "反向显示",IDC_BTN_RevShow,248,55,32,15
+    PUSHBUTTON      "正向显示",IDC_BTN_ForShow,208,55,32,15
+    PUSHBUTTON      "命令触发",IDC_BTN_CmdTrigger,117,147,50,14
+    GROUPBOX        "测试",IDC_STATIC,244,94,40,69
+    PUSHBUTTON      "复位DMD",IDC_RstDmd,246,103,36,14
+    PUSHBUTTON      "全关",IDC_BTN_AllOff,246,133,36,14
+    PUSHBUTTON      "全开",IDC_BTN_AllOn,246,118,36,14
+    PUSHBUTTON      "撤销",IDC_BTN_Revoke,246,148,36,14
+    EDITTEXT        IDC_EDIT_MemWriterAddr,172,147,32,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "写地址",IDC_BTN_WriterAddr,207,147,32,15
+    EDITTEXT        IDC_EDIT_MemMag,172,99,32,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "滚动步数",IDC_BTN_MemMag,207,99,32,15
+    EDITTEXT        IDC_EDIT_MemReadAddr,172,123,32,15,ES_AUTOHSCROLL
+    PUSHBUTTON      "读地址",IDC_BTN_ReadAddr,207,123,32,15
+    PUSHBUTTON      "清空内存",IDC_BTN_ClearMem,117,123,50,14
+    GROUPBOX        "",IDC_STATIC,169,91,72,73
+    LTEXT           "状态栏：",IDC_STATIC,19,14,28,8
+END
+
+IDD_DIALOG1 DIALOGEX 0, 0, 817, 536
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_LeftUpX,717,263,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_RightDownX,761,263,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_LeftUpY,718,293,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_RightDownY,762,292,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "显示区域",IDC_BTN_ShowArea,732,318,50,14
+    CONTROL         "键盘",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,711,220,32,10
+    CONTROL         "鼠标",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,712,198,32,10
+    PUSHBUTTON      "全部显示",IDC_BTN_ShowAllPoint,699,172,50,14
+    PUSHBUTTON      "全部取消",IDC_BTN_ShowZeroPoint,753,172,50,14
+    PUSHBUTTON      "保存",IDC_BTN_SavePoint,699,140,50,14
+    PUSHBUTTON      "取消",IDC_BTN_DrawCancel,753,140,50,14
+    PUSHBUTTON      "上",IDC_BTN_DrawDlgSiteUp,775,195,14,12
+    PUSHBUTTON      "左",IDC_BTN_DrawDlgSiteLeft,763,208,14,12
+    PUSHBUTTON      "右",IDC_BTN_DrawDlgSiteRight,787,208,14,12
+    PUSHBUTTON      "下",IDC_BTN_DrawDlgSiteDown,776,220,14,12
+    GROUPBOX        "X轴",IDC_STATIC,694,265,18,11
+    GROUPBOX        "Y轴",IDC_STATIC,693,293,18,11
+    GROUPBOX        "左上坐标",IDC_STATIC,714,247,38,9
+    GROUPBOX        "右下坐标",IDC_STATIC,760,247,43,9
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080403a8"
+        BEGIN
+            VALUE "CompanyName", "TODO: <公司名>"
+            VALUE "FileDescription", "TODO: <文件说明>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "Experiment.exe"
+            VALUE "LegalCopyright", "TODO: (C) <公司名>。保留所有权利。"
+            VALUE "OriginalFilename", "Experiment.exe"
+            VALUE "ProductName", "TODO: <产品名>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 936
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_EXPERIMENT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 286
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 332
+    END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 810
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 529
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_ABOUTBOX            "关于 Experiment(&A)..."
+END
+
+#endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\Experiment.rc2"  // 非 Microsoft Visual C++ 编辑的资源
+#include "l.CHS\afxres.rc"      // 标准组件
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

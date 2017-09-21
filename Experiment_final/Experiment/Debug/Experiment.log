@@ -1,0 +1,14 @@
+﻿生成启动时间为 2017-09-11 20:40:29。
+     1>项目“C:\Users\PC\Desktop\项目资料\DMD\V2.1_170911_zj\Experiment_final\Experiment\Experiment.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在对“Debug\Experiment.unsuccessfulbuild”执行 Touch 任务。
+       GenerateTargetFrameworkMonikerAttribute:
+       正在跳过目标“GenerateTargetFrameworkMonikerAttribute”，因为所有输出文件相对于输入文件而言都是最新的。
+       ClCompile:
+         E:\VS2010\VC\bin\CL.exe /c /I"D:\Program File\Visual Studio\My Project\Experiment\Experiment" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _MBCS /D _AFXDLL /Gm- /EHa /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Experiment.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /analyze- /errorReport:prompt stdafx.cpp /clr:nostdlib 
+     1>cl : 命令行 error D8016: “/clr”和“/MT”命令行选项不兼容
+     1>已完成生成项目“C:\Users\PC\Desktop\项目资料\DMD\V2.1_170911_zj\Experiment_final\Experiment\Experiment.vcxproj”(build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:00.97
