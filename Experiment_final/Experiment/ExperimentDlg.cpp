@@ -80,21 +80,21 @@ END_MESSAGE_MAP()
 
 
 
-void CExperimentDlg::MessageBox(char *str,...)
-{
-	va_list var;
-	va_start(var,str);
-	char buffer[NAME_MAX];
-	memset(buffer,0,NAME_MAX);
-	vsnprintf(buffer,NAME_MAX,str,var);
-	va_end(var);
-	CWnd::MessageBox(buffer);
-}
+//void CExperimentDlg::MessageBox(char *str,...)
+//{
+//	va_list var;
+//	va_start(var,str);
+//	char buffer[NAME_MAX];
+//	memset(buffer,0,NAME_MAX);
+//	vsnprintf(buffer,NAME_MAX,str,var);
+//	va_end(var);
+//	CWnd::MessageBox(buffer);
+//}
 
 CExperimentDlg::CExperimentDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CExperimentDlg::IDD, pParent)
 	, m_PluseWidth(0)
-	, m_FrameCount(0)
+	, m_FrameCount(1)
 	, m_StartIndex(0)
 	, m_EndIndex(-1)
 	, IntStartIndex(0)
@@ -199,7 +199,7 @@ void CExperimentDlg::readPoint()		//初始化文件信息。
 	m_finishPoint.y=0;
 
 	
-	//MessageBox("location文件路径：%s",(LPSTR)(LPCTSTR)m_strSavePath);
+	
 	if((fp=fopen((LPSTR)(LPCTSTR)m_strLocationPathAndName,"r"))!=NULL)//文件存在
 	{
 
@@ -208,12 +208,16 @@ void CExperimentDlg::readPoint()		//初始化文件信息。
 		char searchPath[PATH_MAX];
 		fgets(data,30,fp);
 		fgets(savePath,PATH_MAX,fp);
-		fgets(searchPath,PATH_MAX,fp);
+		//fgets(searchPath,PATH_MAX,fp);
 		sscanf(data,"%d %d %d %d",&m_startPoint.x,&m_startPoint.y,&m_finishPoint.x,&m_finishPoint.y);
+		int len = strlen(savePath);
+		savePath[len-1]='\0';
 		m_strSavePath.Format("%s",savePath);
 		//strSearchPath.Format("%s",searchPath);
 		fclose(fp);
 	}
+
+	//MessageBox(m_strSavePath);
 	int i,j;
 	for(j=0;j<768;j++)
 		for(i=0;i<1024;i++)
@@ -231,31 +235,12 @@ void CExperimentDlg::savePoint()
 {
 	FILE *fp;
 	fp=fopen((LPSTR)(LPCTSTR)m_strLocationPathAndName,"w+");
-	char data[30];
-	char savePath[PATH_MAX];
-	char searchPath[PATH_MAX];
-	memset(data,0,30);
-	memset(savePath,0,PATH_MAX);
-	memset(searchPath,0,PATH_MAX);
-	sprintf(data,"%d %d %d %d",m_startPoint.x,m_startPoint.y,m_finishPoint.x,m_finishPoint.y);
-	fputs(data,fp);
-	fputc('\n',fp);
-	char *pStr,*p;
-	strncpy(savePath,(LPSTR)(LPCTSTR)m_strSavePath,PATH_MAX);
-	p=pStr=savePath;
-	while(*p!='\0' && *p !='\n')
-		p++;
-	if(*p=='\n')
-		*p='\0';
-	fputs(pStr,fp);
-	fputc('\n',fp);
-	strncpy(searchPath,(LPSTR)(LPCTSTR)m_strSearchPath,PATH_MAX);
-	p=pStr=searchPath;
-	while(*p!='\0' && *p !='\n')
-		p++;
-	if(*p=='\n')
-		*p='\0';
-	fputs(pStr,fp);
+
+	CString content;
+	content.Format("%d %d %d %d", m_startPoint.x,m_startPoint.y,m_finishPoint.x,m_finishPoint.y);
+	content +="\n"+ m_strSavePath + "\n" +m_strSearchPath;
+	//content += "\n"+ m_strSavePath; 
+	fputs(content,fp);
 	fclose(fp);
 
 	int i,j;
@@ -370,10 +355,10 @@ void CExperimentDlg::OnPaint()
 	memset(buffer2,0,10);
 	memset(buffer3,0,10);
 	memset(buffer4,0,10);
-	_itoa(m_startPoint.y,buffer1,10);
-	_itoa(m_startPoint.x,buffer2,10);
-	_itoa(m_finishPoint.y,buffer3,10);
-	_itoa(m_finishPoint.x,buffer4,10);
+	_itoa(m_startPoint.x,buffer1,10);
+	_itoa(m_startPoint.y,buffer2,10);
+	_itoa(m_finishPoint.x,buffer3,10);
+	_itoa(m_finishPoint.y,buffer4,10);
 	int ascend=40;
 	pDC->TextOutA(220,334+ascend,_T("                                "));
 	pDC->TextOutA(280,334+ascend,_T("                               "));
@@ -396,7 +381,7 @@ HCURSOR CExperimentDlg::OnQueryDragIcon()
 //************************************     
 // 函数名称: DownLoad     自定义函数
 // 函数说明：将数据文件一帧一帧地发送到DMD中，同时生成ASCILL对比文件     
-// 返 回 值: void     
+// 返 回 值: void    
 // 参    数: CString strFileName 文件名(不带后缀)    
 // 参    数: CString strFilePath 文件路径    
 //************************************  
@@ -431,8 +416,9 @@ void CExperimentDlg::DownLoad(CString strFileName,CString strFilePath)
 	GetDlgItem(IDC_EDIT_ProgressBar)->SetWindowText(strtemp);
 
 	//////////////////////////////////////////////////////////////////////////
-	unsigned char *save = new unsigned char[2*dataLength()*dataWidth()];	//用于存储正常模式下的保存数据
-	memset(save,'0',2*dataLength()*dataWidth());//以ascii码存储，剩余的以二进制存储
+	int savecount = m_FrameCount*(2*1024*768+768);//每行需要加上加上回车符
+	unsigned char *save = new unsigned char[savecount];	//用于存储正常模式下的保存数据
+	memset(save,'0',savecount);//以ascii码存储，
 	//生成写入文件的地址和格式str    text1_234_42.txt
 	char ch1[10];
 	char ch2[10];
@@ -441,10 +427,20 @@ void CExperimentDlg::DownLoad(CString strFileName,CString strFilePath)
 	itoa(dataLength(),ch2,10);
 	itoa(dataWidth(),ch1,10);
 	CString StrAscillFileNameAndPath;
-	StrAscillFileNameAndPath = m_strSavePath+ strFileName + '_' + ch1 +  '_' + ch2 + ".txt";
+	//m_strSavePath = "C:\Users\PC\Desktop\aaa\\";
+	StrAscillFileNameAndPath = _T(m_strSavePath)+ strFileName + '_' + ch1 +  '_' + ch2 + ".txt";
+	
+	//MessageBox(m_strSavePath);
 	//m_strSavePath为保存文件的目录地址，在构造函数中设置。
-	CFile fileSave(StrAscillFileNameAndPath,CFile::modeCreate|CFile::modeWrite);
-		
+	CFile fileSave;
+	if (fileSave.Open(StrAscillFileNameAndPath,CFile::modeCreate|CFile::modeWrite) == FALSE)
+	{
+		MessageBox(m_strSavePath + "打开失败！");
+		return ;
+	}
+	
+	
+ 
 	//////////////////////////////////////////////////////////////////////////
 	//开始下载数据+保存比对文件
 	p=dmd_buf_org;
@@ -456,6 +452,9 @@ void CExperimentDlg::DownLoad(CString strFileName,CString strFilePath)
 		{
 			for(int i=0;i<1024*768;i++)
 			dmd_buf_temp[i]&=reference[i];
+		}else{
+			MessageBox("选区不合法，请重新选择！");
+			return;
 		}
 		//将dmd_buf_temp中有用的数据转换成ASCII后存入save中
    		int i,j,k=0;
@@ -463,24 +462,25 @@ void CExperimentDlg::DownLoad(CString strFileName,CString strFilePath)
 		{
 			for(i=0;i<1024;i++)
 			{
-				if((i>=m_startPoint.x)&&(i<=m_finishPoint.x)&&(j>=m_startPoint.y)&&(j<=m_finishPoint.y))//在矩形框内
-				{
-					save[k]=dmd_buf_temp[j*1024+i]+48;
-					k++;
-					save[k]=' ';
-					k++;
-				}
+				
+				save[k++]=dmd_buf_temp[j*1024+i]+48;
+				save[k++]=' ';
+	
 			}
+			save[k++]='\n';
+
 		}
 		//将save数组写入文件 ******
-		fileSave.Write(save,2*dataLength()*dataWidth());
+		fileSave.Write(save,savecount);
+		
 		//将数据回写
 		CompressData(dmd_buf_temp,dmd_buf);		//收缩数据到768*1024/8字节
 		//将数据下载到板子中
-		SendData(dmd_buf);//下载一帧的随机数    p为要下载的数据、dmd_buf_temp为扩展后的临时数据、dmd_buf为实际下载的数据
+		//SendData(dmd_buf);//下载一帧的随机数    p为要下载的数据、dmd_buf_temp为扩展后的临时数据、dmd_buf为实际下载的数据
 		p+=LINECOUNT*COLUMNCOUNT/8;//指向下一帧
 	}
 	fileSave.Close();
+
 	delete[](save);
 	
 	delete[](dmd_buf_temp);		//下载时产生的临时数据
@@ -521,14 +521,18 @@ void CExperimentDlg::OnBnClickedFileDownload()
 	
 	//得到文件路径
 	CString strFilePath=fileDialog.GetPathName();
+	
 	/*
 	CString strtemp;
 	strtemp.Format("%s",strFilePath);
 	AppendText(IDC_EDIT_StatusBar,strtemp);
 	*/
 	strFilePath.Delete(strFilePath.ReverseFind('\\')+1,strFilePath.GetLength()-strFilePath.ReverseFind('\\')-1);
-	
+	m_strSearchPath = strFilePath;
+	GetDlgItem(IDC_EDIT_SearchPath)->SetWindowTextA(m_strSearchPath);
+	/*
 	SendCommand(0x00, 0x00);//停止显示;
+	*/
 	AppendText(IDC_EDIT_StatusBar, "DMD停止显示!");
 	
 	DownLoad(strFileName,strFilePath);
@@ -714,9 +718,10 @@ void CExperimentDlg::CompressData(unsigned char *ibuf, unsigned char *obuf)
 	{
 		ZeroMemory(obuf, 128*768);
 
-		for(m=0;m<768;m++)
-			for(j=0;j<16;j++)
-				for(i=0;i<8;i++)
+		for(m=0;m<768;m++) //以下是分别对768行的1028位数据处理
+			for(j=0;j<16;j++) //分为16个时钟周期
+				for(i=0;i<8;i++) //每个周期的64位数据分为8个字节处理，
+					             //每位隔16位微镜处理，那么一个字节隔128位微镜处理
 				{
 					tt = i;
 					for(k=0;k<8;k++)
@@ -1309,7 +1314,7 @@ void CExperimentDlg::OnBnClickedMultfileDownload()
 	
 	//SetTimer(1, 3000, NULL); 
 	
-	//MessageBox("下载完毕");
+	MessageBox("下载完毕");
 }
 
 
@@ -1787,6 +1792,7 @@ void CExperimentDlg::OnTimer(UINT_PTR nIDEvent)
 				//发送开始显示指令
 				SendCommand(0x00, 0x01);
 				AppendText(IDC_EDIT_StatusBar, "DMD开始显示!");
+				
 				
 				strtemp.Format("文件%s正在显示..",strNameTemp);
 				GetDlgItem(IDC_EDIT_ProgressBar)->SetWindowText(strtemp);

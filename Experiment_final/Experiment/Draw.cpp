@@ -361,8 +361,20 @@ void Draw::OnBnClickedSavePoint()//按下保存键
 	//2,生成reference数组
 	//savePoint();
 	//生成reference数组
-	m_startPoint = m_mouseStartPoint;
-	m_finishPoint = m_mouseFinishPoint;
+	if(!m_isMouseFlag)//如果键盘正在工作
+	{
+		UpdateData(TRUE);
+		m_startPoint.x = m_leftUpX;
+		m_startPoint.y = m_leftUpY;
+		m_finishPoint.x = m_rightDownX;
+		m_finishPoint.y = m_rightDownY;
+
+	}else
+	{
+		m_startPoint = m_mouseStartPoint;
+		m_finishPoint = m_mouseFinishPoint;
+	}
+	
 	int i,j;
 	for(j=0;j<768;j++)
 	{
@@ -391,10 +403,16 @@ void Draw::OnBnClickedShowAllPoint()//按下全部显示按钮
 {
 	// TODO: 在此添加控件通知处理程序代码
 	//将起始点坐标设置为（0，0）终点设置为：（1023，767）
+	//更新鼠标
 	m_mouseStartPoint.x=m_mouseStartPoint.y=0;
 	m_mouseFinishPoint.x=1023;
 	m_mouseFinishPoint.y=767;
-
+	//更新键盘
+	m_leftUpX=0;
+	m_leftUpY=0;
+	m_rightDownX=1023;
+	m_rightDownY=767;
+	UpdateData(FALSE);
 	CClientDC dc(this);
 	CBrush brush(RGB(255,0,0));
 	dc.FillRect(CRect(m_mouseStartPoint,m_mouseFinishPoint),&brush);
@@ -406,6 +424,9 @@ void Draw::OnBnClickedShowZeroPoint()// 全部取消
 {
 	// TODO: 在此添加控件通知处理程序代码
 	m_mouseStartPoint.x=m_mouseStartPoint.y=m_mouseFinishPoint.x=m_mouseFinishPoint.y=0;
+
+	m_leftUpX=m_leftUpY=m_rightDownX=m_rightDownY=0;
+	UpdateData(FALSE);
 
 	CClientDC dc(this);
 	CBrush brush(RGB(255,255,255));

@@ -29,7 +29,7 @@ public:
 	void CExperimentDlg::SendLine(int Line,unsigned char *dmd_buf_org_scan,unsigned char *dmd_buf_temp_scan,unsigned char *dmd_buf_scan,unsigned char *save_scan,unsigned char *dmd_buf_scan_all);//注意该程序只能发送一帧的数据
 	void CExperimentDlg::DownLoad(CString str,CString strSearchPath);
 	void CExperimentDlg::SendCommand(UCHAR hbyte, UCHAR lbyte);
-	void CExperimentDlg::MessageBox(char *str,...);
+//	void CExperimentDlg::MessageBox(char *str,...);
 	void CExperimentDlg::SetEditText(int nID,CString str);
 	void CExperimentDlg::AppendText(int controlId, CString strAdd);
     bool CExperimentDlg::IsOpenDevice();
