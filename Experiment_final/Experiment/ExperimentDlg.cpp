@@ -416,7 +416,7 @@ void CExperimentDlg::DownLoad(CString strFileName,CString strFilePath)
 	GetDlgItem(IDC_EDIT_ProgressBar)->SetWindowText(strtemp);
 
 	//////////////////////////////////////////////////////////////////////////
-	int savecount = m_FrameCount*(2*1024*768+768);//每行需要加上加上回车符
+	int savecount = 2*1024*768+768;//每行需要加上加上回车符
 	unsigned char *save = new unsigned char[savecount];	//用于存储正常模式下的保存数据
 	memset(save,'0',savecount);//以ascii码存储，
 	//生成写入文件的地址和格式str    text1_234_42.txt
@@ -471,12 +471,13 @@ void CExperimentDlg::DownLoad(CString strFileName,CString strFilePath)
 
 		}
 		//将save数组写入文件 ******
+		fileSave.SeekToEnd();
 		fileSave.Write(save,savecount);
 		
 		//将数据回写
 		CompressData(dmd_buf_temp,dmd_buf);		//收缩数据到768*1024/8字节
 		//将数据下载到板子中
-		//SendData(dmd_buf);//下载一帧的随机数    p为要下载的数据、dmd_buf_temp为扩展后的临时数据、dmd_buf为实际下载的数据
+		SendData(dmd_buf);//下载一帧的随机数    p为要下载的数据、dmd_buf_temp为扩展后的临时数据、dmd_buf为实际下载的数据
 		p+=LINECOUNT*COLUMNCOUNT/8;//指向下一帧
 	}
 	fileSave.Close();
@@ -499,11 +500,11 @@ void CExperimentDlg::DownLoad(CString strFileName,CString strFilePath)
 void CExperimentDlg::OnBnClickedFileDownload()
 {
 	UpdateData(TRUE);
-	/*
+	
 	if(!IsOpenDevice()){
 		return;
 	}
-	*/
+	
 	
 	if(m_FrameCount == 0 ){
 		MessageBox("帧数不能为0!");
@@ -530,9 +531,9 @@ void CExperimentDlg::OnBnClickedFileDownload()
 	strFilePath.Delete(strFilePath.ReverseFind('\\')+1,strFilePath.GetLength()-strFilePath.ReverseFind('\\')-1);
 	m_strSearchPath = strFilePath;
 	GetDlgItem(IDC_EDIT_SearchPath)->SetWindowTextA(m_strSearchPath);
-	/*
+	
 	SendCommand(0x00, 0x00);//停止显示;
-	*/
+	
 	AppendText(IDC_EDIT_StatusBar, "DMD停止显示!");
 	
 	DownLoad(strFileName,strFilePath);
@@ -749,9 +750,11 @@ void CExperimentDlg::CompressData(unsigned char *ibuf, unsigned char *obuf)
 void CExperimentDlg::OnBnClickedRandomNumDownload()//单击下载伪随机数
 {
 	UpdateData(TRUE);
+	
 	if(!IsOpenDevice()){
 		return;
 	}
+	
 	if(m_FrameCount == 0 ){
 		MessageBox("帧数不能为0!");
 		return;
@@ -764,8 +767,8 @@ void CExperimentDlg::OnBnClickedRandomNumDownload()//单击下载伪随机数
 	unsigned char *dmd_buf_temp_scan=	new unsigned char[m_FrameCount*COLUMNCOUNT];		//扫描模式下的临时数据：用于区域选择
 
 	unsigned char *dmd_buf			=	new unsigned char[LINECOUNT*COLUMNCOUNT/8];		//正常模式下最终发送数据
-
-	unsigned char *save				=	new unsigned char[2*dataLength()*dataWidth()];	//正常模式下的数据保存
+	int savecount =2*1024*768+768;//每行需要加上加上回车符
+	unsigned char *save				=	new unsigned char[savecount];	//正常模式下的数据保存
 	unsigned char *save_scan		=	new unsigned char[2*m_FrameCount*COLUMNCOUNT];	//扫描模式下的数据保存
 
 	unsigned char *dmd_buf_scan_all	=	new unsigned char[m_FrameCount*LINECOUNT*COLUMNCOUNT/8];	//扫描方式下最终全部发送的数据
@@ -777,8 +780,8 @@ void CExperimentDlg::OnBnClickedRandomNumDownload()//单击下载伪随机数
 	memset(dmd_buf_temp		,0,	LINECOUNT*COLUMNCOUNT				);
 	memset(dmd_buf_temp_scan,0,	m_FrameCount*COLUMNCOUNT				);
 	memset(dmd_buf			,0,	LINECOUNT*COLUMNCOUNT/8				);
-	memset(save				,0,	2*dataLength()*dataWidth()			);
-	memset(save_scan		,0,	2*m_FrameCount*COLUMNCOUNT			);
+	memset(save				,'0',	savecount			);
+	memset(save_scan		,'0',	2*m_FrameCount*COLUMNCOUNT			);
 	memset(dmd_buf_scan_all	,0,	m_FrameCount*LINECOUNT*COLUMNCOUNT/8	);
 
 	SYSTEMTIME time;
@@ -788,7 +791,7 @@ void CExperimentDlg::OnBnClickedRandomNumDownload()//单击下载伪随机数
 	SendCommand(0x00, 0x00);
 	AppendText(IDC_EDIT_StatusBar, "DMD停止显示!");
 
-	AppendText(IDC_EDIT_ProgressBar, "下载伪随机数中..");
+	GetDlgItem(IDC_EDIT_ProgressBar)->SetWindowText("下载伪随机数中..");
 	//MessageBox("开始下载伪随机数");		
 
 	if(m_Mode == NORMAL)				//下载伪随机数
@@ -823,30 +826,37 @@ void CExperimentDlg::OnBnClickedRandomNumDownload()//单击下载伪随机数
 				for(int i=0;i<1024*768;i++)
 					dmd_buf_temp[i]&=reference[i];
 			}
+			else
+			{
+				MessageBox("选区非法，请重新选择！");
+				return;
+			}
 			//将dmd_buf_temp中有用的数据转换成ASCII后存入save中
    			int i,j,k=0;
 			for(j=0;j<768;j++)
 			{
 				for(i=0;i<1024;i++)
 				{
-					if((i>=m_startPoint.x)&&(i<=m_finishPoint.x)&&(j>=m_startPoint.y)&&(j<=m_finishPoint.y))//在矩形框内
-					{
-						save[k]=dmd_buf_temp[j*1024+i]+48;
-						k++;
-						save[k]=' ';
-						k++;
-					}
+					
+					save[k++]=dmd_buf_temp[j*1024+i]+48;	
+					save[k++]=' ';
+				
 				}
+				save[k++]='\n';
 			}
 
 			//将save数组写入文件 ******
-			fileSave.Write(save,2*dataLength()*dataWidth());
+			fileSave.SeekToEnd();
+			fileSave.Write(save,savecount);
 			//将数据回写
 			CompressData(dmd_buf_temp,dmd_buf);		//收缩数组到1024*96
 			//将数据下载到板子中
 			SendData(dmd_buf);//下载一帧的随机数    p为要下载的数据、dmd_buf_temp为扩展后的临时数据、dmd_buf为实际下载的数据
 		}
 		fileSave.Close();
+		
+		GetDlgItem(IDC_EDIT_ProgressBar)->SetWindowText("伪随机数下载完毕！");
+		MessageBox("下载完毕");
 	}
 	else if(m_Mode == SCAN)				//下载伪随机数
 	{

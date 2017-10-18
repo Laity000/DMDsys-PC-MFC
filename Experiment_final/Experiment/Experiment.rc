@@ -80,8 +80,8 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSM
 CAPTION "关于 Experiment"
 FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    LTEXT           "Experiment，1.0 版",IDC_STATIC,42,14,114,8,SS_NOPREFIX
-    LTEXT           "Copyright (C) 2011",IDC_STATIC,42,26,114,8
+    LTEXT           "Experiment，2.1.2 版",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2017",IDC_STATIC,42,26,114,8
     DEFPUSHBUTTON   "确定",IDOK,113,41,50,14,WS_GROUP
 END
 
