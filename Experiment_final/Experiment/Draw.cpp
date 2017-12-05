@@ -412,7 +412,13 @@ void Draw::OnBnClickedShowAllPoint()//按下全部显示按钮
 	m_leftUpY=0;
 	m_rightDownX=1023;
 	m_rightDownY=767;
+
 	UpdateData(FALSE);
+	//聚焦
+	GetDlgItem(IDC_EDIT_LeftUpX)->SetFocus();
+	GetDlgItem(IDC_EDIT_LeftUpY)->SetFocus();
+	GetDlgItem(IDC_EDIT_RightDownX)->SetFocus();
+	GetDlgItem(IDC_EDIT_RightDownY)->SetFocus();
 	CClientDC dc(this);
 	CBrush brush(RGB(255,0,0));
 	dc.FillRect(CRect(m_mouseStartPoint,m_mouseFinishPoint),&brush);
@@ -427,6 +433,11 @@ void Draw::OnBnClickedShowZeroPoint()// 全部取消
 
 	m_leftUpX=m_leftUpY=m_rightDownX=m_rightDownY=0;
 	UpdateData(FALSE);
+	//聚焦
+	GetDlgItem(IDC_EDIT_LeftUpX)->SetFocus();
+	GetDlgItem(IDC_EDIT_LeftUpY)->SetFocus();
+	GetDlgItem(IDC_EDIT_RightDownX)->SetFocus();
+	GetDlgItem(IDC_EDIT_RightDownY)->SetFocus();
 
 	CClientDC dc(this);
 	CBrush brush(RGB(255,255,255));

@@ -1,68 +1,22 @@
-﻿生成启动时间为 2017-10-18 10:20:00。
-     1>项目“C:\Users\PC\Desktop\项目资料\DMD\V2.1_170921_zj\Experiment_final\Experiment\Experiment.vcxproj”在节点 2 上(build 个目标)。
+﻿生成启动时间为 2017-12-05 20:41:24。
+     1>项目“C:\Users\PC\Desktop\项目资料\DMD\V2.1.3_zj\Experiment_final\Experiment\Experiment.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Release\Experiment.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         E:\VS2010\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\Experiment.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ExperimentDlg.cpp
-         ExperimentDlg.cpp
-     1>ExperimentDlg.cpp(203): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 E:\VS2010\VC\include\stdio.h(234) : 参见“fopen”的声明
-     1>ExperimentDlg.cpp(212): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 E:\VS2010\VC\include\stdio.h(325) : 参见“sscanf”的声明
-     1>ExperimentDlg.cpp(208): warning C4101: “searchPath”: 未引用的局部变量
-     1>ExperimentDlg.cpp(237): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 E:\VS2010\VC\include\stdio.h(234) : 参见“fopen”的声明
-     1>ExperimentDlg.cpp(358): warning C4996: '_itoa': This function or variable may be unsafe. Consider using _itoa_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(451) : 参见“_itoa”的声明
-     1>ExperimentDlg.cpp(359): warning C4996: '_itoa': This function or variable may be unsafe. Consider using _itoa_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(451) : 参见“_itoa”的声明
-     1>ExperimentDlg.cpp(360): warning C4996: '_itoa': This function or variable may be unsafe. Consider using _itoa_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(451) : 参见“_itoa”的声明
-     1>ExperimentDlg.cpp(361): warning C4996: '_itoa': This function or variable may be unsafe. Consider using _itoa_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(451) : 参见“_itoa”的声明
-     1>ExperimentDlg.cpp(411): warning C4244: “参数”: 从“ULONGLONG”转换到“UINT”，可能丢失数据
-     1>ExperimentDlg.cpp(427): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(867) : 参见“itoa”的声明
-     1>ExperimentDlg.cpp(428): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(867) : 参见“itoa”的声明
-     1>ExperimentDlg.cpp(454): warning C4805: “&=”: 在操作中将类型“unsigned char”与类型“bool”混合不安全
-     1>ExperimentDlg.cpp(553): warning C4805: “&=”: 在操作中将类型“unsigned char”与类型“bool”混合不安全
-     1>ExperimentDlg.cpp(582): warning C4101: “rLen”: 未引用的局部变量
-     1>ExperimentDlg.cpp(805): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(867) : 参见“itoa”的声明
-     1>ExperimentDlg.cpp(806): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(867) : 参见“itoa”的声明
-     1>ExperimentDlg.cpp(827): warning C4805: “&=”: 在操作中将类型“unsigned char”与类型“bool”混合不安全
-     1>ExperimentDlg.cpp(869): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(867) : 参见“itoa”的声明
-     1>ExperimentDlg.cpp(870): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(867) : 参见“itoa”的声明
-     1>ExperimentDlg.cpp(904): warning C4805: “&=”: 在操作中将类型“unsigned char”与类型“bool”混合不安全
-     1>ExperimentDlg.cpp(917): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 E:\VS2010\VC\include\stdlib.h(867) : 参见“itoa”的声明
-     1>ExperimentDlg.cpp(1323): warning C4244: “参数”: 从“double”转换到“UINT”，可能丢失数据
-     1>ExperimentDlg.cpp(1351): warning C4129: “: 不可识别的字符转义序列
+         所有输出均为最新。
        ResourceCompile:
          所有输出均为最新。
        Link:
-         E:\VS2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\PC\Desktop\项目资料\DMD\V2.1_170921_zj\Experiment_final\Release\Experiment.exe" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\Experiment.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\PC\Desktop\项目资料\DMD\V2.1_170921_zj\Experiment_final\Release\Experiment.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\PC\Desktop\项目资料\DMD\V2.1_170921_zj\Experiment_final\Release\Experiment.lib" /MACHINE:X86 Release\Experiment.res
-         Release\Draw.obj
-         Release\Experiment.obj
-         Release\ExperimentDlg.obj
-         Release\SerialPort.obj
-         Release\stdafx.obj
-         CyAPI.lib
-         正在生成代码
-         已完成代码的生成
-         Experiment.vcxproj -> C:\Users\PC\Desktop\项目资料\DMD\V2.1_170921_zj\Experiment_final\Release\Experiment.exe
+         所有输出均为最新。
+         Experiment.vcxproj -> C:\Users\PC\Desktop\项目资料\DMD\V2.1.3_zj\Experiment_final\Release\Experiment.exe
        Manifest:
-         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\PC\Desktop\项目资料\DMD\V2.1_170921_zj\Experiment_final\Release\Experiment.exe;#1" /manifest Release\Experiment.exe.intermediate.manifest E:\VS2010\VC\Include\Manifest\dpiaware.manifest
+         所有输出均为最新。
        FinalizeBuildStatus:
          正在删除文件“Release\Experiment.unsuccessfulbuild”。
          正在对“Release\Experiment.lastbuildstate”执行 Touch 任务。
-     1>已完成生成项目“C:\Users\PC\Desktop\项目资料\DMD\V2.1_170921_zj\Experiment_final\Experiment\Experiment.vcxproj”(build 个目标)的操作。
+     1>已完成生成项目“C:\Users\PC\Desktop\项目资料\DMD\V2.1.3_zj\Experiment_final\Experiment\Experiment.vcxproj”(build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:21.48
+已用时间 00:00:00.14

@@ -95,14 +95,14 @@ CExperimentDlg::CExperimentDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CExperimentDlg::IDD, pParent)
 	, m_PluseWidth(0)
 	, m_FrameCount(1)
-	, m_StartIndex(0)
-	, m_EndIndex(-1)
+	, m_StartIndex(1)
+	, m_EndIndex(2)
 	, IntStartIndex(0)
 	, IntEndIndex(-1)
 	, m_FreqSet(0)
-	, m_MemMag(0)
-	, m_MemReadAddr(0)
-	, m_MemWriterAddr(0)
+	//, m_MemMag(0)
+	//, m_MemReadAddr(0)
+	//, m_MemWriterAddr(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	//flagDraw=false;
@@ -130,9 +130,9 @@ void CExperimentDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT_EndIndex, m_EndIndex);
 	DDV_MinMaxInt(pDX, m_EndIndex, -1, INT_MAX);
 	DDX_Text(pDX, IDC_EDIT_FreqSet, m_FreqSet);
-	DDX_Text(pDX, IDC_EDIT_MemMag, m_MemMag);
-	DDX_Text(pDX, IDC_EDIT_MemReadAddr, m_MemReadAddr);
-	DDX_Text(pDX, IDC_EDIT_MemWriterAddr, m_MemWriterAddr);
+	//  DDX_Text(pDX, IDC_EDIT_MemMag, m_MemMag);
+	//  DDX_Text(pDX, IDC_EDIT_MemReadAddr, m_MemReadAddr);
+	//DDX_Text(pDX, IDC_EDIT_MemWriterAddr, m_MemWriterAddr);
 	DDX_Text(pDX, IDC_EDIT_MultfileName, m_MultfileName);
 }
 
@@ -148,8 +148,8 @@ ON_BN_CLICKED(IDC_BTN_ShowDMD, &CExperimentDlg::OnBnClickedShowDMD)
 ON_BN_CLICKED(IDC_BTN_StopDMD, &CExperimentDlg::OnBnClickedStopDMD)
 ON_BN_CLICKED(IDC_BTN_SiteSelect, &CExperimentDlg::OnBnClickedSiteSelect)
 ON_BN_CLICKED(IDC_BTN_RandomNumDownload, &CExperimentDlg::OnBnClickedRandomNumDownload)
-ON_BN_CLICKED(IDC_BTN_Cancel, &CExperimentDlg::OnBnClickedCancel)
-ON_BN_CLICKED(IDC_BTN_OK, &CExperimentDlg::OnBnClickedOK)
+//ON_BN_CLICKED(IDC_BTN_Cancel, &CExperimentDlg::OnBnClickedCancel)
+//ON_BN_CLICKED(IDC_BTN_OK, &CExperimentDlg::OnBnClickedOK)
 ON_BN_CLICKED(IDC_BTN_SiteUp, &CExperimentDlg::OnBnClickedSiteUp)
 ON_BN_CLICKED(IDC_BTN_SiteDown, &CExperimentDlg::OnBnClickedSiteDown)
 ON_BN_CLICKED(IDC_BTN_SiteLeft, &CExperimentDlg::OnBnClickedSiteLeft)
@@ -171,14 +171,14 @@ ON_BN_CLICKED(IDC_BTN_FreqSet, &CExperimentDlg::OnBnClickedFreqSet)
 ON_BN_CLICKED(IDC_BTN_ForShow, &CExperimentDlg::OnBnClickedForShow)
 ON_BN_CLICKED(IDC_BTN_RevShow, &CExperimentDlg::OnBnClickedRevShow)
 ON_BN_CLICKED(IDC_BTN_CmdTrigger, &CExperimentDlg::OnBnClickedCmdTrigger)
-ON_BN_CLICKED(IDC_RstDmd, &CExperimentDlg::OnBnClickedRstdmd)
-ON_BN_CLICKED(IDC_BTN_AllOn, &CExperimentDlg::OnBnClickedAllOn)
-ON_BN_CLICKED(IDC_BTN_AllOff, &CExperimentDlg::OnBnClickedAllOff)
-ON_BN_CLICKED(IDC_BTN_Revoke, &CExperimentDlg::OnBnClickedRevoke)
+//ON_BN_CLICKED(IDC_RstDmd, &CExperimentDlg::OnBnClickedRstdmd)
+//ON_BN_CLICKED(IDC_BTN_AllOn, &CExperimentDlg::OnBnClickedAllOn)
+//ON_BN_CLICKED(IDC_BTN_AllOff, &CExperimentDlg::OnBnClickedAllOff)
+//ON_BN_CLICKED(IDC_BTN_Revoke, &CExperimentDlg::OnBnClickedRevoke)
 ON_BN_CLICKED(IDC_BTN_ClearMem, &CExperimentDlg::OnBnClickedClearMem)
-ON_BN_CLICKED(IDC_BTN_MemMag, &CExperimentDlg::OnBnClickedMemmag)
-ON_BN_CLICKED(IDC_BTN_ReadAddr, &CExperimentDlg::OnBnClickedReadAddr)
-ON_BN_CLICKED(IDC_BTN_WriterAddr, &CExperimentDlg::OnBnClickedWriterAddr)
+//ON_BN_CLICKED(IDC_BTN_MemMag, &CExperimentDlg::OnBnClickedMemmag)
+//ON_BN_CLICKED(IDC_BTN_ReadAddr, &CExperimentDlg::OnBnClickedReadAddr)
+//ON_BN_CLICKED(IDC_BTN_WriterAddr, &CExperimentDlg::OnBnClickedWriterAddr)
 ON_WM_TIMER()
 
 END_MESSAGE_MAP()
@@ -297,7 +297,8 @@ BOOL CExperimentDlg::OnInitDialog()
 
 	GetDlgItem(IDC_EDIT_ProgressBar)->SetWindowTextA("未下载任何数据");
 	
-	SetEditText(IDC_EDIT_SavePath,m_strSavePath);
+	//SetEditText(IDC_EDIT_SavePath,m_strSavePath);
+	GetDlgItem(IDC_EDIT_SavePath)->SetWindowTextA(m_strSavePath);
 
 	//SetEditText(IDC_EDIT_LeftUP,m_strSearchPath);
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
@@ -432,12 +433,16 @@ void CExperimentDlg::DownLoad(CString strFileName,CString strFilePath)
 	
 	//MessageBox(m_strSavePath);
 	//m_strSavePath为保存文件的目录地址，在构造函数中设置。
+	
+	//无矩阵
+	///*
 	CFile fileSave;
 	if (fileSave.Open(StrAscillFileNameAndPath,CFile::modeCreate|CFile::modeWrite) == FALSE)
 	{
 		MessageBox(m_strSavePath + "打开失败！");
 		return ;
 	}
+	//*/
 	
 	
  
@@ -471,6 +476,8 @@ void CExperimentDlg::DownLoad(CString strFileName,CString strFilePath)
 
 		}
 		//将save数组写入文件 ******
+		////fileSave.SeekToEnd();
+		////fileSave.Write(save,savecount);
 		fileSave.SeekToEnd();
 		fileSave.Write(save,savecount);
 		
@@ -480,6 +487,7 @@ void CExperimentDlg::DownLoad(CString strFileName,CString strFilePath)
 		SendData(dmd_buf);//下载一帧的随机数    p为要下载的数据、dmd_buf_temp为扩展后的临时数据、dmd_buf为实际下载的数据
 		p+=LINECOUNT*COLUMNCOUNT/8;//指向下一帧
 	}
+	////fileSave.Close();
 	fileSave.Close();
 
 	delete[](save);
@@ -809,6 +817,7 @@ void CExperimentDlg::OnBnClickedRandomNumDownload()//单击下载伪随机数
 		str	+= ch2;
 		str	+= ".txt";
 		str = m_strSavePath + str;
+		////CFile fileSave(str,CFile::modeCreate|CFile::modeWrite);
 		CFile fileSave(str,CFile::modeCreate|CFile::modeWrite);
 		for(int count=0;count<m_FrameCount;count++)
 		{
@@ -846,6 +855,8 @@ void CExperimentDlg::OnBnClickedRandomNumDownload()//单击下载伪随机数
 			}
 
 			//将save数组写入文件 ******
+			////fileSave.SeekToEnd();
+			////fileSave.Write(save,savecount);
 			fileSave.SeekToEnd();
 			fileSave.Write(save,savecount);
 			//将数据回写
@@ -853,6 +864,7 @@ void CExperimentDlg::OnBnClickedRandomNumDownload()//单击下载伪随机数
 			//将数据下载到板子中
 			SendData(dmd_buf);//下载一帧的随机数    p为要下载的数据、dmd_buf_temp为扩展后的临时数据、dmd_buf为实际下载的数据
 		}
+		////fileSave.Close();
 		fileSave.Close();
 		
 		GetDlgItem(IDC_EDIT_ProgressBar)->SetWindowText("伪随机数下载完毕！");
@@ -959,23 +971,23 @@ void CExperimentDlg::OnBnClickedRandomNumDownload()//单击下载伪随机数
 // 函数说明：取消  
 // 返 回 值: void     
 //************************************  
-void CExperimentDlg::OnBnClickedCancel()
-{
-	// TODO: 在此添加控件通知处理程序代码
-	OnCancel();
-}
+//void CExperimentDlg::OnBnClickedCancel()
+//{
+//	// TODO: 在此添加控件通知处理程序代码
+//	OnCancel();
+//}
 
 //************************************     
 // 函数名称: OnBnClickedOK     
 // 函数说明：确定     
 // 返 回 值: void     
 //************************************  
-void CExperimentDlg::OnBnClickedOK()
-{
-	// TODO: 在此添加控件通知处理程序代码
+//void CExperimentDlg::OnBnClickedOK()
+//{
+//	// TODO: 在此添加控件通知处理程序代码
 //	hMutex_flag = FALSE;
-	//OnOK();
-}
+//	//OnOK();
+//}
 
 //************************************     
 // 函数名称: OnBnClickedSiteUp     
@@ -1321,10 +1333,11 @@ void CExperimentDlg::OnBnClickedMultfileDownload()
 	AppendText(IDC_EDIT_StatusBar, "DMD停止显示!");
 
 	SetTimer(1, 1000/m_FreqSet*m_FrameCount*1.5, NULL); 
+	//SetTimer(1, 1000*m_FrameCount*1.5, NULL); 
 	
 	//SetTimer(1, 3000, NULL); 
 	
-	MessageBox("下载完毕");
+	//MessageBox("下载完毕");
 }
 
 
@@ -1444,7 +1457,6 @@ void CExperimentDlg::OnBnClickedForShow()
 		return;
 	}
 	//发送指令
-	//SendCommand(0x10, 0x01);
 	SendCommand(0x10, 0x00);
 	AppendText(IDC_EDIT_StatusBar, "DMD正向显示!");
 }
@@ -1461,7 +1473,6 @@ void CExperimentDlg::OnBnClickedRevShow()
 		return;
 	}
 	//发送指令
-	//SendCommand(0x10, 0x00);
 	SendCommand(0x10, 0x01);
 	AppendText(IDC_EDIT_StatusBar, "DMD反向显示!");
 }
@@ -1483,15 +1494,15 @@ void CExperimentDlg::OnBnClickedCmdTrigger()
 }
 
 
-void CExperimentDlg::OnBnClickedRstdmd()
-{
-	if(!IsOpenDevice()){
-		return;
-	}
-	//发送DMD复位指令
-	SendCommand(0x04, 0x01);
-	AppendText(IDC_EDIT_StatusBar, "DMD复位!");
-}
+//void CExperimentDlg::OnBnClickedRstdmd()
+//{
+//	if(!IsOpenDevice()){
+//		return;
+//	}
+//	//发送DMD复位指令
+//	SendCommand(0x04, 0x01);
+//	AppendText(IDC_EDIT_StatusBar, "DMD复位!");
+//}
 
 
 //************************************     
@@ -1499,15 +1510,15 @@ void CExperimentDlg::OnBnClickedRstdmd()
 // 函数说明：DMD全开     
 // 返 回 值: void     
 //************************************  
-void CExperimentDlg::OnBnClickedAllOn()
-{
-	if(!IsOpenDevice()){
-		return;
-	}
-	//发送指令
-	SendCommand(0x1c, 0x01);
-	AppendText(IDC_EDIT_StatusBar, "DMD全部翻转到+12度，需要撤销才能正常工作!");  
-}
+//void CExperimentDlg::OnBnClickedAllOn()
+//{
+//	if(!IsOpenDevice()){
+//		return;
+//	}
+//	//发送指令
+//	SendCommand(0x1c, 0x01);
+//	AppendText(IDC_EDIT_StatusBar, "DMD全部翻转到+12度，需要撤销才能正常工作!");  
+//}
 
 
 //************************************     
@@ -1515,16 +1526,16 @@ void CExperimentDlg::OnBnClickedAllOn()
 // 函数说明：DMD全关    
 // 返 回 值: void     
 //************************************  
-void CExperimentDlg::OnBnClickedAllOff()
-{
-	
-	if(!IsOpenDevice()){
-		return;
-	}
-	//发送指令
-	SendCommand(0x20, 0x01);
-	AppendText(IDC_EDIT_StatusBar, "DMD全部翻转到-12度，需要撤销才能正常工作!");
-}
+//void CExperimentDlg::OnBnClickedAllOff()
+//{
+//	
+//	if(!IsOpenDevice()){
+//		return;
+//	}
+//	//发送指令
+//	SendCommand(0x20, 0x01);
+//	AppendText(IDC_EDIT_StatusBar, "DMD全部翻转到-12度，需要撤销才能正常工作!");
+//}
 
 
 //************************************     
@@ -1532,16 +1543,16 @@ void CExperimentDlg::OnBnClickedAllOff()
 // 函数说明：DMD全开全关模式撤销     
 // 返 回 值: void     
 //************************************  
-void CExperimentDlg::OnBnClickedRevoke()
-{
-	if(!IsOpenDevice()){
-		return;
-	}
-	//发送指令
-	SendCommand(0x20, 0x00);
-	SendCommand(0x1c, 0x00);
-	AppendText(IDC_EDIT_StatusBar, "DMD全开全关模式撤销!");
-}
+//void CExperimentDlg::OnBnClickedRevoke()
+//{
+//	if(!IsOpenDevice()){
+//		return;
+//	}
+//	//发送指令
+//	SendCommand(0x20, 0x00);
+//	SendCommand(0x1c, 0x00);
+//	AppendText(IDC_EDIT_StatusBar, "DMD全开全关模式撤销!");
+//}
 
 //************************************     
 // 函数名称: OnBnClickedClearMem     
@@ -1580,18 +1591,18 @@ void CExperimentDlg::OnBnClickedClearMem()
 // 函数说明：滚动步数     
 // 返 回 值: void     
 //************************************  
-void CExperimentDlg::OnBnClickedMemmag()
-{
-	UpdateData(TRUE);
-	if(!IsOpenDevice()){
-		return;
-	}
-	//发送指令
-	SendCommand(((m_MemMag>>8) & 0x0f)+ 0x90, m_MemMag & 0xff);
-	CString strtemp;
-	strtemp.Format(_T("滚动显示步数设定：%d，\r\n按触发命令显示一帧。"),m_MemMag);     
-	AppendText(IDC_EDIT_StatusBar, strtemp);
-}
+//void CExperimentDlg::OnBnClickedMemmag()
+//{
+//	UpdateData(TRUE);
+//	if(!IsOpenDevice()){
+//		return;
+//	}
+//	//发送指令
+//	SendCommand(((m_MemMag>>8) & 0x0f)+ 0x90, m_MemMag & 0xff);
+//	CString strtemp;
+//	strtemp.Format(_T("滚动显示步数设定：%d，\r\n按触发命令显示一帧。"),m_MemMag);     
+//	AppendText(IDC_EDIT_StatusBar, strtemp);
+//}
 
 
 //************************************     
@@ -1599,18 +1610,18 @@ void CExperimentDlg::OnBnClickedMemmag()
 // 函数说明：读地址：当下一个触发信号到时，将显示内存中第m_MemReadAddr帧的数据。     
 // 返 回 值: void     
 //************************************  
-void CExperimentDlg::OnBnClickedReadAddr()
-{
-	UpdateData(TRUE);
-	if(!IsOpenDevice()){
-		return;
-	}
-	//发送指令
-	SendCommand(((m_MemReadAddr>>8) & 0x0f)+ 0x60, m_MemReadAddr & 0xff);
-	CString strtemp;
-	strtemp.Format(_T("读地址设定(单位帧):%d，\r\n按触发命令显示一帧。"),m_MemReadAddr);     
-	AppendText(IDC_EDIT_StatusBar, strtemp);
-}
+//void CExperimentDlg::OnBnClickedReadAddr()
+//{
+//	UpdateData(TRUE);
+//	if(!IsOpenDevice()){
+//		return;
+//	}
+//	//发送指令
+//	SendCommand(((m_MemReadAddr>>8) & 0x0f)+ 0x60, m_MemReadAddr & 0xff);
+//	CString strtemp;
+//	strtemp.Format(_T("读地址设定(单位帧):%d，\r\n按触发命令显示一帧。"),m_MemReadAddr);     
+//	AppendText(IDC_EDIT_StatusBar, strtemp);
+//}
 
 
 //************************************     
@@ -1618,18 +1629,18 @@ void CExperimentDlg::OnBnClickedReadAddr()
 // 函数说明：写地址：将写入内存中第帧的数据    
 // 返 回 值: void     
 //************************************  
-void CExperimentDlg::OnBnClickedWriterAddr()
-{
-	UpdateData(TRUE);
-	if(!IsOpenDevice()){
-		return;
-	}
-	//发送指令
-	SendCommand(((m_MemWriterAddr>>8) & 0x0f)+ 0x70, m_MemWriterAddr & 0xff);
-	CString strtemp;
-	strtemp.Format(_T("写地址设定(单位帧):%d。"),m_MemWriterAddr);     
-	AppendText(IDC_EDIT_StatusBar, strtemp);
-}
+//void CExperimentDlg::OnBnClickedWriterAddr()
+//{
+//	UpdateData(TRUE);
+//	if(!IsOpenDevice()){
+//		return;
+//	}
+//	//发送指令
+//	SendCommand(((m_MemWriterAddr>>8) & 0x0f)+ 0x70, m_MemWriterAddr & 0xff);
+//	CString strtemp;
+//	strtemp.Format(_T("写地址设定(单位帧):%d。"),m_MemWriterAddr);     
+//	AppendText(IDC_EDIT_StatusBar, strtemp);
+//}
 
 //************************************     
 // 函数名称: SendCommand    自定义函数
@@ -1785,6 +1796,7 @@ void CExperimentDlg::OnTimer(UINT_PTR nIDEvent)
 			CString strNameTemp = NULL;
 
 			//下载多个文件
+			
 			if(IntStartIndex < IntEndIndex+1)
 			{
 				strNameTemp.Format("%d",IntStartIndex);
